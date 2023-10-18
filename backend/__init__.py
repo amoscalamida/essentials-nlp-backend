@@ -30,7 +30,9 @@ def create_app(test_config=None):
 
     model.init_app(app)
     from . import predict
+    from . import data
 
     app.register_blueprint(predict.bp)
+    app.register_blueprint(data.bp)
 
     return app
