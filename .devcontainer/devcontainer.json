@@ -1,5 +1,13 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
-  "features": {
-  }
+  "name": "Python 3",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/python:0-3.11",
+  "postCreateCommand": "pip3 install -r requirements.txt",
+  "forwardPorts": [5000]
+  // this is not working yet(not implemnted)
+  // "portsAttributes": {
+  //   "5000": {
+  //     "visibility": "public"
+  //   }
+  // }
 }
