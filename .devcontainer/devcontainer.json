@@ -3,11 +3,16 @@
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"image": "mcr.microsoft.com/devcontainers/python:0-3.11",
   "postCreateCommand": "pip3 install -r requirements.txt",
-  "forwardPorts": [5000]
-  // this is not working yet(not implemnted)
-  // "portsAttributes": {
-  //   "5000": {
-  //     "visibility": "public"
-  //   }
-  // }
+  "postAttachCommand": {
+    "server": "flask --app backend run"
+  },
+  "portsAttributes": {
+    "5000": {
+      "label": "Development Backend Server",
+      "visibility": "public"
+    }
+  },
+  "forwardPorts": [
+    5000
+  ]
 }
