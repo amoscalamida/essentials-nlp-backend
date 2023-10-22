@@ -17,7 +17,7 @@ def predict():
         print(request)
         request_data = request.get_json()
         phrase = request_data["text"]
-        append_to_file(phrase)
+        # append_to_file(phrase)
         model = get_model()
         prediction = model.predict([phrase])
         
