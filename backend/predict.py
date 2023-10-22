@@ -1,6 +1,6 @@
 from backend.model import get_model
 from flask import Blueprint, request
-
+import random
 
 def append_to_file(text):
     with open("data/new_data.txt", "a") as file1:
@@ -20,6 +20,11 @@ def predict():
         append_to_file(phrase)
         model = get_model()
         prediction = model.predict([phrase])
-        return str(prediction[0][0])
+        
+        result = {
+            "canton": random.choice(["zh", "lu", "so"]), # for development. replace with actual model output
+            "certainty": str(prediction[0][0])
+        }
+        return result 
 
     return "nothing to see"
