@@ -2,10 +2,11 @@ from backend.model import get_model
 from flask import Blueprint, request
 import random
 
-def append_to_file(text):
-    with open("data/new_data.txt", "a") as file1:
+
+def append_to_file(text, predicted_canton, prediction_certainty):
+    with open("data/predictions.csv", "a") as file1:
         # Writing data to a file
-        file1.write(text + ";\n")
+        file1.write(text + ", " + predicted_canton + ", " + prediction_certainty + "\n")
 
 
 bp = Blueprint("model", __name__, url_prefix="/model")
@@ -17,14 +18,19 @@ def predict():
         print(request)
         request_data = request.get_json()
         phrase = request_data["text"]
-        # append_to_file(phrase)
         model = get_model()
         prediction = model.predict([phrase])
-        
+
+        # for development only. replace with actual model output
+        predicted_canton = random.choice(["zh", "lu", "so"])
+        prediction_certainty = str(prediction[0][0])
+
         result = {
-            "canton": random.choice(["zh", "lu", "so"]), # for development. replace with actual model output
-            "certainty": str(prediction[0][0])
+            "canton": predicted_canton,
+            "certainty": prediction_certainty
         }
-        return result 
+        append_to_file(phrase, predicted_canton, prediction_certainty)
+
+        return result
 
     return "nothing to see"

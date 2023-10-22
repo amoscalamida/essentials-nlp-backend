@@ -2,9 +2,9 @@ from flask import Blueprint, request
 
 
 def append_to_file(text, canton):
-    with open("data/new_data.txt", "a") as file1:
+    with open("data/new_data.csv", "a") as file1:
         # Writing data to a file
-        file1.write(f'{text}, {canton};\n')
+        file1.write(f'{text}, {canton}\n')
 
 
 bp = Blueprint("data", __name__, url_prefix="/data")
