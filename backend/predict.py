@@ -6,7 +6,7 @@ import random
 def append_to_file(text, predicted_canton, prediction_certainty):
     with open("data/predictions.csv", "a") as file1:
         # Writing data to a file
-        file1.write(text + ", " + predicted_canton + ", " + prediction_certainty + "\n")
+        file1.write(f'"{hash(text) * -1}","{text}", "{predicted_canton}", {prediction_certainty}\n')
 
 
 bp = Blueprint("model", __name__, url_prefix="/model")

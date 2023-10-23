@@ -14,5 +14,12 @@
   },
   "forwardPorts": [
     5000
-  ]
+],
+"customizations": {
+	"vscode": {
+		"extensions": [
+			"mechatroner.rainbow-csv"
+		]
+	}
+}
 }
