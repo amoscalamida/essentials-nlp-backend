@@ -37,7 +37,7 @@ def predict():
         softmax_predictions = model.predict(X_pred)
         prediction = np.argmax(softmax_predictions)
         predicted_canton = f"{dialects[prediction]}"
-        prediction_certainty = f"{softmax_predictions[0][prediction]:.2%}"
+        prediction_certainty = f"{softmax_predictions[0][prediction]}"
         print(f"{dialects[prediction]} ({softmax_predictions[0][prediction]:.2%})")
         result = {
             "canton": predicted_canton,
