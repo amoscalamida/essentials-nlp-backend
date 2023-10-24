@@ -22,11 +22,6 @@ def predict():
         request_data = request.get_json()
         phrase = request_data["text"]
         model = get_model()
-        # prediction = model.predict([phrase])
-
-        # for development only. replace with actual model output
-        # predicted_canton = random.choice(["zh", "lu", "so"])
-        # prediction_certainty = str(prediction[0][0])
 
         INPUT_STRING = phrase
         # Encode Input String
@@ -38,10 +33,6 @@ def predict():
         print("Vocabulary size, sequence length: %d, %d" % (vocab_size, seq_length))
         X_pred = onehot_encode_data(X_pred, vocab_size)
         print("Encoded Input String.")
-
-        # Load Model
-
-        # Model Prediction
         dialects = ["LU", "BE", "ZH", "BS"]
         softmax_predictions = model.predict(X_pred)
         prediction = np.argmax(softmax_predictions)
@@ -52,7 +43,6 @@ def predict():
             "canton": predicted_canton,
             "certainty": prediction_certainty,
         }
-        # prediction = model.predict([phrase])
         append_to_file(phrase, predicted_canton, prediction_certainty)
 
         return result
