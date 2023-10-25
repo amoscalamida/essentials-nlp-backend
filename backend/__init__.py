@@ -7,12 +7,10 @@ from flask_cors import CORS
 # flask --app backend run --debug
 
 
-
-
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
-    CORS(app, resources={r"/(model|data)/.*": {"origins": "https://laughing-guacamole-jr5gwqg7x5q3p74g-3000.app.github.dev"}})
+    CORS(app, resources={r"/(model|data)/.*": {"origins": "*"}})
 
     app.config.from_mapping(
         SECRET_KEY="dev",
