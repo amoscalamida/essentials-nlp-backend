@@ -1,16 +1,31 @@
 from backend.model import get_model, encode_store, onehot_encode_data
 from flask import Blueprint, request
-import random
+import os
+import psycopg2
 import numpy as np
 
 
 def append_to_file(text, predicted_canton, prediction_certainty):
-    with open("data/predictions.csv", "a") as file1:
-        # Writing data to a file
-        file1.write(
-            f'"{hash(text) * -1}","{text}", "{predicted_canton}", {prediction_certainty}\n'
+
+    try:
+        conn = psycopg2.connect(
+            database=os.environ["DB_NAME"],
+            user=os.environ["DB_USER"],
+            password=os.environ["DB_PWD"],
+            host=os.environ["DB_HOST"],
+            port=os.environ["DB_PORT"],
         )
 
+        cur = conn.cursor()
+        cur.execute(
+            f"INSERT INTO predictions (hash_id, text, canton, certainty) VALUES ('{hash(text)}','{text}', '{predicted_canton}', {prediction_certainty})"
+        )
+
+        conn.commit()
+        conn.close()
+    except:
+        print("DB connection failed")
+        
 
 bp = Blueprint("model", __name__, url_prefix="/model")
 

@@ -1,10 +1,19 @@
 from flask import Blueprint, request
-
+import psycopg2
+import os
 
 def append_to_file(text, canton):
-    with open("data/new_data.csv", "a") as file1:
-        # Writing data to a file
-        file1.write(f'"{hash(text) * -1}", "{text}", "{canton}"\n')
+    try:
+        conn = psycopg2.connect(database=os.environ['DB_NAME'], user=os.environ['DB_USER'], 
+                            password=os.environ['DB_PWD'], host=os.environ['DB_HOST'], port=os.environ['DB_PORT']) 
+    
+        cur = conn.cursor()
+        cur.execute(f"INSERT INTO new_data (hash_id, text, canton) VALUES ('{hash(text)}','{text}', '{canton}')")
+        
+        conn.commit()
+        conn.close()
+    except:
+        print("DB connection failed")
 
 
 bp = Blueprint("data", __name__, url_prefix="/data")
