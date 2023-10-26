@@ -32,7 +32,9 @@ def predict():
     return "nothing to see"
 
 @bp.route("/show", methods=["GET"])
-def show_data(filter="all"):
+def show_data():
+
+    filter = request.args.get('filter', "all")
     try:
         conn = psycopg2.connect(database=os.environ['DB_NAME'], user=os.environ['DB_USER'], 
                             password=os.environ['DB_PWD'], host=os.environ['DB_HOST'], port=os.environ['DB_PORT']) 
