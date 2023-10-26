@@ -30,3 +30,54 @@ def predict():
         return "saved"
 
     return "nothing to see"
+
+@bp.route("/show", methods=["GET"])
+def show_data():
+    try:
+        conn = psycopg2.connect(database=os.environ['DB_NAME'], user=os.environ['DB_USER'], 
+                            password=os.environ['DB_PWD'], host=os.environ['DB_HOST'], port=os.environ['DB_PORT']) 
+    
+        cur = conn.cursor()
+        cur.execute(f"SELECT * FROM new_data")
+        result = cur.fetchall()
+        conn.close()
+
+        
+        # format the output as a html table showing the data
+        html = "<table><tr><th>hash_id</th><th>text</th><th>canton</th></tr>"
+        for row in result:
+            html += "<tr>"
+            for col in row:
+                html += f"<td>{col}</td>"
+            html += "</tr>"
+        html += "</table>"
+        return html
+    except:
+        print("DB connection failed")
+        return "DB connection failed"
+    
+@bp.route("/show-predictions", methods=["GET"])
+def show_predictions():
+    try:
+        conn = psycopg2.connect(database=os.environ['DB_NAME'], user=os.environ['DB_USER'], 
+                            password=os.environ['DB_PWD'], host=os.environ['DB_HOST'], port=os.environ['DB_PORT'])
+        
+        cur = conn.cursor()
+        cur.execute(f"SELECT * FROM predictions")
+        result = cur.fetchall()
+        conn.close()
+
+
+        # format the output as a html table showing the data
+        html = "<table><tr><th>hash_id</th><th>text</th><th>canton</th><th>certainty</th></tr>"
+        for row in result:
+            html += "<tr>"
+            for col in row:
+                html += f"<td>{col}</td>"
+            html += "</tr>"
+        html += "</table>"
+
+        return html
+    except:
+        print("DB connection failed")
+        return "DB connection failed"
