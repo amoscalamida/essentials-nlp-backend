@@ -1,6 +1,6 @@
-# Swiss German Dialect Detection: Front End
+# Swiss German Dialect Detection: Back End
 
-The "Swiss German Dialect Detection" is a project as part of the "Essentials of Text and Speech Processing" course in the autumn semester 2023 at the University of Zurich. The project aims to detect Swiss German dialects based on user input. This README will guide you on setting up and running the front end part of the project, provide an overview of its main functions.
+The "Swiss German Dialect Detection" is a project as part of the "Essentials of Text and Speech Processing" course in the autumn semester 2023 at the University of Zurich. The project aims to detect Swiss German dialects based on user input. This README will guide you on setting up and running the back end part of the project, provide an overview of its main functions.
 
 ## Table of Contents
 - [Usage](#usage)
