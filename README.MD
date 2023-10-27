@@ -1,2 +1,9 @@
-Start the app: flask --app backend run
-Make port 5000 public: Ports-->5000->right click-->Change prot visibility
+# Installation
+
+ 1. install pipenv: pip install pipenv
+ 2. switch to root folder and create new pipenv: pipenv shell
+ 3. install packages: pipenv install
+
+# Run dev server
+
+ 1. flask --app backend run
