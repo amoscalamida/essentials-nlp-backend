@@ -7,3 +7,7 @@
 # Run dev server
 
  1. flask --app backend run
+
+# Github Codespace:
+ 1. flask --app backend run
+ 2. set port 5000 to public
