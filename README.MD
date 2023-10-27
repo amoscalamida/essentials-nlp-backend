@@ -28,15 +28,28 @@ To use the "Swiss German Dialect Detection" application, follow these steps:
 
 ## Project Component Overview
 
-The "Swiss German Dialect Detection" project is a react-based application that detects Swiss German dialects based on user input. This repository contains the front end code which provides an intuitive interface for users to input text. When a back end is also deployed, the server side system analyzes the text to predict the dialect spoken. The front end project includes the following main components:
+The "Swiss German Dialect Detection" project is a react-based and flusk based application that detects Swiss German dialects based on user input. This repository contains the back end code which provied the endpoints for analyzing the text input from the frontend. The backend provides the following endpoints
 
-1. **Input Form**: Users can enter text to be analyzed to predict the Swiss German dialect they might be speaking.
+1. **model/predict** this POST endpoints expects a json object structured the following way:
 
-2. **Thinking Stage**: This stage shows a processing animation while the system analyzes the input.
+	```json
+	{"text": "Dialect to predict"}
+	```
+   it return the prediction which canton is the best fit for the given input
+   ```json
+	{
+      "canton": "predicted canton",
+      "certainty": "prediction certainty",
+   }
+	```
 
-3. **Result Stage**: After processing, the system displays the predicted dialect along with a certainty score. Users can confirm the prediction or provide feedback if they believe the prediction is incorrect.
+2. **data/save** this POST endpoints expects a json object structured the following way:
+	```json
+	{"text": "Dialect to predict", "canton": "canton"}
+	```
+   it saves the the input to file
 
-The project also features a dynamic background with animated blobs and provides user-friendly feedback during the process.
+3. **data/show** this GET endpoint returns a html datable with all the predictions:
 
 ## Deploying the project
 
